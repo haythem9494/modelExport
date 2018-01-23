@@ -1,0 +1,63 @@
+<nav class="navbar navbar-expand-lg fixed-top" [ngClass]="{sidebarPushRight: isActive}">
+
+    <img src="assets/images/expensya2.png" width="150px" class="user-avatar" routerLink="/dashboard" [routerLinkActive]="['router-link-active']">
+    <a class="navbar-brand" href="#"> </a>
+    <button class="navbar-toggler" type="button" (click)="toggleSidebar()">
+        <!-- <span class="navbar-toggler-icon"></span> -->
+        <i class="fa fa-bars text-muted" aria-hidden="true"></i>
+    </button>
+    <div class="collapse navbar-collapse">
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="{{ 'Search' | translate }}">
+        </form>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown" ngbDropdown>
+                <a class="nav-link" routerLink="/dashboard" [routerLinkActive]="['router-link-active']">
+                    <i class="fa fa-home"></i> {{ 'Dashboard' | translate }} <b class="caret"></b>
+                </a>
+
+            </li>
+            <li class="nav-item dropdown" ngbDropdown>
+                <a class="nav-link" [routerLink]="['/expenses']" [routerLinkActive]="['router-link-active']">
+                    <i class="fa fa-list"></i> {{ 'Expenses' | translate }} <b class="caret"></b>
+                </a>
+
+            </li>
+            <li class="nav-item dropdown" ngbDropdown>
+                <a class="nav-link" routerLink="/new-export" [routerLinkActive]="['router-link-active']">
+                    <i class="fa fa-plus"></i> {{ 'New Format' | translate }} <b class="caret"></b>
+                </a>
+
+            </li>
+
+
+
+
+
+
+            <li class="nav-item dropdown " ngbDropdown role="group">
+                <a class="nav-link " ngbDropdownToggle>
+                    <i class="fa fa-language"></i> {{ 'Language' | translate }}<b class="caret"></b>
+                </a>
+                <div class="dropdown-menu" ngbDropdownMenu>
+                    <button class="dropdown-item" (click)="changeLang('en')">Englais</button>
+                    <button class="dropdown-item" (click)="changeLang('fr')">Francais</button>
+
+                </div>
+            </li>
+            <li class="nav-item dropdown " ngbDropdown role="group">
+                <a class="nav-link " ngbDropdownToggle>
+                    <i class="fa fa-user"></i> {{currentUser.firstName}} {{currentUser.lastName}}<b class="caret"></b>
+                </a>
+                <div class="dropdown-menu" ngbDropdownMenu>
+                    <button class="dropdown-item">Profile</button>
+                    <button class="dropdown-item" [routerLink]="['/login']" (click)="onLoggedout()">Logout</button>
+
+                </div>
+            </li>
+
+
+
+        </ul>
+    </div>
+</nav>

@@ -1,0 +1,32 @@
+<nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
+    
+   
+    <div class="list-group">
+
+        <br>
+               <!--  {{currentUser.firstName}}  {{currentUser.lastName}} -->
+      
+        <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-dashboard"></i>&nbsp;{{ 'Dashboard' | translate }}
+        </a>
+
+        <a [routerLink]="['/expenses']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            
+            <i class="fa fa-file-o"></i>&nbsp;{{ 'Expenses' | translate }}
+            
+        </a>
+
+        <a routerLink="/new-export" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-edit"></i>&nbsp;{{ 'New CSV' | translate }}
+        </a>
+        
+        
+        <a class="dropdown-item" [routerLink]="['/login']" (click)="onLoggedout()">
+            <i class="fa fa-fw fa-power-off"></i> {{ 'Log Out' | translate }}
+       
+        </a>
+        
+      
+       
+    </div>
+</nav>

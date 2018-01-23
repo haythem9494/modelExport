@@ -1,0 +1,118 @@
+<div [@routerTransition]>
+    <app-page-header [heading]="'CSV Export'" [icon]="'fa fa-fw fa-edit'">
+    </app-page-header>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h3> {{ 'New Export Format' | translate }}</h3>
+                </div>
+                <div class="card-body">
+                    <!-- div for repeat -->
+                    <div class="col-xl-12">
+
+                        <div class="card-body">
+                            <div class="row">
+
+                                <div class="col col-sm-2">
+                                    <p> {{ 'Name' | translate }}:</p>
+                                </div>
+                                <div class="col col-sm-6">
+                                    <p> <input type="text" [(ngModel)]="name" class="form-control" (ngModelChange)="dataChanged($event)"></p>
+                                    <p style="color: rgb(236, 78, 78)" *ngIf="showtext">{{ 'Export Format Already Exists' | translate }}</p>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-xl-12" dnd-sortable-container [sortableData]="Order">
+                        <div class="card mb-3" *ngFor="let item of Order; let i = index" dnd-sortable [sortableIndex]="i">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col col-sm-2">
+                                        <!--  {{i + 1}}-->
+                                        {{ 'Name' | translate }}
+                                    </div>
+                                    <div class="col col-sm-4">
+
+                                        <input type="text" id="{{i}}" class="form-control" value="{{item.entet}}" [(ngModel)]="item.entet">
+                                    </div>
+                                    <div class="col col-sm-5">
+
+                                    </div>
+                                    <div class="col col-sm-1">
+                                        <a (click)="deletelist(i)"> X </a>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col col-sm-2">
+                                        Formula
+                                    </div>
+                                    <div class="col col-sm-4">
+
+
+                                        <select [(ngModel)]="item.formule" (ngModelChange)="dataChanged($event)" name="data" class="form-control">
+                                        <option *ngFor="let currentData of listfomule" [ngValue]="currentData.formule">
+                                              {{currentData.formule}}
+                                         </option>
+                                 </select>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <a (click)="getlist()"> <button type="button" class="btn btn-outline-primary"> {{ 'Add column' | translate }}</button> </a>
+                        <a (click)="register()"><button type="button" class="btn btn-outline-success">{{ 'Save Export Format' | translate }}</button></a>
+                        <div>
+                            <br>
+                            <div class="alert alert-success" *ngIf="show">
+                                <strong>{{ 'Add column' | translate }}</strong> <br> To use it, go to the Expenses , select some expenses , click "Export to..." and select your new template which now appears in the list. Go back to Settings
+                            </div>
+                            <div class="alert alert-danger" *ngIf="showtext">
+                                <strong>Export Format Already Exists</strong> <br> We can't rename the export format because there is already an export format by that name.
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <!-- End div -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h3>Exemple output</h3>
+                </div>
+                <div class="card-body table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr style="background: rgb(185, 209, 255)">
+                                <th></th>
+                                <th *ngFor="let item of Order; let i = index"> {{ getCaracter(i) }} </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th style="background:rgb(185, 209, 255)">{{ 0 }}</th>
+                                <td *ngFor="let item of Order; let i = index" style="size:5"> {{item.entet}}</td>
+                            </tr>
+                            <tr *ngFor="let Ex  of Export ; let a = index">
+                                <th style="background:rgb(185, 209, 255)">{{ a+1 }}</th>
+                                <td *ngFor="let item of Order; let i = index" style="size:5"> {{getvalue(a,i)}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
